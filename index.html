@@ -52,42 +52,54 @@
 
         .header-content {
             display: flex;
-            align-items: center;
+            align-items: center; /* 垂直居中对齐 */
             justify-content: center;
             gap: 14.25px;
             margin-bottom: 11.4px;
         }
 
         .logo-container {
-            position: relative;
+            display: flex;
+            align-items: center; /* 确保内部元素垂直居中 */
+            justify-content: center;
         }
 
+        /* --- 修改 Logo 样式 --- */
         .logo {
-            width: 47.5px;
-            height: 47.5px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #3498db, #2980b9); /* 可选：保留圆形背景色 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
+            /* 移除固定宽高和圆形背景 */
+            background: none; 
+            border-radius: 0; 
+            width: auto;
+            height: auto;
+            /* 保持原有的过渡和阴影效果 */
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-            overflow: hidden;
+            box-shadow: none; /* 可选：移除圆形时的阴影 */
+            overflow: visible; /* 允许图片超出原始容器范围（如果需要） */
         }
 
         .logo:hover {
-            transform: rotate(360deg) scale(1.1);
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.5);
+            /* 移除旋转，因为不再是圆形图标 */
+            transform: scale(1.1); 
+            /* 可选：调整悬停时的阴影 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
         }
 
-        /* 新增：为 favicon 图片添加样式 */
+        /* --- 修改 Favicon 样式 --- */
         .logo-favicon {
-            width: 70%;
-            height: 70%;
-            object-fit: contain; /* 确保图片在容器内完整显示 */
-            /* 如果你想让 favicon 完全覆盖圆形区域并适应圆形裁剪，可以考虑使用 object-fit: cover; */
+            /* 设置新的宽度和高度，使其与文字大小匹配 */
+            width: 42px; /* 大致等于 h1 字高的 0.8 倍 (2.375rem * 0.8 ≈ 42px) */
+            height: 42px;
+            object-fit: contain;
+            /* 添加一点右边距，与文字保持间距 */
+            margin-right: 10px; 
+            
+            /* 新增：添加旋转特效 */
+            transition: transform 0.5s ease-out;
         }
+        .logo-favicon:hover {
+            transform: rotate(360deg);
+        }
+        /* --- End 修改 Logo 样式 --- */
 
 
         h1 {
@@ -96,6 +108,9 @@
             font-weight: 300;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
             color: #2c3e50;
+            /* 确保文字也参与垂直居中 */
+            display: flex;
+            align-items: center;
         }
 
         .tagline {
@@ -321,23 +336,22 @@
             background: #3498db;
         }
 
+        /* --- 调整中等屏幕下的样式 --- */
         @media (max-width: 1024px) {
             .container {
                 max-width: 1140px;
                 padding: 11.4px;
             }
 
-            .logo {
-                width: 42.75px;
-                height: 42.75px;
+            /* 调整 logo 和 favicon 大小 */
+            .logo-favicon {
+                width: 38px;
+                height: 38px;
+                margin-right: 8px;
             }
-
-            .header-content {
-                gap: 11.4px;
-            }
-
+            
             h1 {
-                font-size: 2.09rem;
+               font-size: 2.09rem;
             }
 
             .tagline {
@@ -377,7 +391,9 @@
                 font-size: 0.76rem;
             }
         }
+        /* --- End 调整中等屏幕下的样式 --- */
 
+        /* --- 调整小屏幕下的样式 --- */
         @media (max-width: 768px) {
             .container {
                 max-width: 100%;
@@ -385,17 +401,22 @@
             }
 
             .header-content {
-                flex-direction: row;
-                justify-content: center;
+                /* 在非常小的屏幕上可能需要堆叠 */
+                flex-direction: column; 
+                gap: 10px; /* 增加 logo 和文字之间的间距 */
             }
-
-            .logo {
-                width: 38px;
-                height: 38px;
+            
+            /* 调整 logo 和 favicon 大小 */
+            .logo-favicon {
+                width: 34px;
+                height: 34px;
+                margin-right: 0; /* 在列排列时不需要右边距 */
             }
-
+            
+            /* 让标题居中 */
             h1 {
                 font-size: 1.9rem;
+                justify-content: center; /* 如果 h1 内部有多个 flex 项，则居中 */
             }
 
             .tagline {
@@ -442,19 +463,18 @@
                 gap: 3.8px;
             }
         }
+        /* --- End 调整小屏幕下的样式 --- */
 
+        /* --- 调整超小屏幕下的样式 --- */
         @media (max-width: 480px) {
             .container {
                 padding: 5.7px;
             }
 
-            .logo {
-                width: 34.2px;
-                height: 34.2px;
-            }
-
-            .header-content {
-                gap: 9.5px;
+            /* 进一步调整 logo 和 favicon 大小 */
+            .logo-favicon {
+                width: 30px;
+                height: 30px;
             }
 
             h1 {
@@ -509,6 +529,7 @@
                 padding: 1.9px 3.8px;
             }
         }
+        /* --- End 调整超小屏幕下的样式 --- */
 
         .project-card {
             will-change: transform;
@@ -524,11 +545,8 @@
         <div class="hero-header">
             <div class="header-content">
                 <div class="logo-container">
-                    <div class="logo">
-                        <!-- 修改这里：用 img 标签替换原来的 i 标签 -->
-                        <!-- src 应该指向你的 favicon.ico 文件的实际路径 -->
-                        <img src="https://www.coolist.net/favicon.ico" alt="Logo" class="logo-favicon">
-                    </div>
+                    <!-- 修改部分：移除了 .logo div，直接应用样式到 img -->
+                    <img src="https://www.coolist.net/favicon.ico" alt="Logo" class="logo-favicon">
                 </div>
                 <h1>酷软清单</h1>
             </div>
