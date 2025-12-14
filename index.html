@@ -8,6 +8,51 @@
     <link rel="icon" type="image/x-icon" href="https://www.coolist.net/favicon.ico">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg-gradient-light: linear-gradient(135deg, #f8f9fa, #e9ecef, #dee2e6);
+            --bg-gradient-dark: linear-gradient(135deg, #1a1a1a, #2d2d2d, #1a1a1a);
+            --text-color-light: #333;
+            --text-color-dark: #e0e0e0;
+            --card-bg-light: rgba(248, 249, 250, 0.9);
+            --card-bg-dark: rgba(30, 30, 30, 0.9);
+            --card-hover-light: rgba(52, 152, 219, 0.2);
+            --card-hover-dark: rgba(52, 152, 219, 0.3);
+            --border-light: rgba(0,0,0,0.1);
+            --border-dark: rgba(255,255,255,0.1);
+            --shadow-light: 0 3px 12px rgba(0, 0, 0, 0.06);
+            --shadow-dark: 0 3px 12px rgba(0, 0, 0, 0.3);
+            --hover-shadow-light: 0 12px 24px rgba(52, 152, 219, 0.2);
+            --hover-shadow-dark: 0 12px 24px rgba(52, 152, 219, 0.3);
+            --header-text-light: #2c3e50;
+            --header-text-dark: #e0e0e0;
+            --sub-text-light: #7f8c8d;
+            --sub-text-dark: #aaaaaa;
+            --link-color-light: #3498db;
+            --link-color-dark: #5dade2;
+            --link-hover-light: #2980b9;
+            --link-hover-dark: #5499c7;
+            --status-active-light: linear-gradient(135deg, #2ecc71, #27ae60);
+            --status-active-dark: linear-gradient(135deg, #27ae60, #219653);
+            --status-closed-light: linear-gradient(135deg, #e74c3c, #c0392b);
+            --status-closed-dark: linear-gradient(135deg, #c0392b, #a93226);
+            --status-transferred-light: linear-gradient(135deg, #f39c12, #d35400);
+            --status-transferred-dark: linear-gradient(135deg, #d35400, #ba4a00);
+            --screenshot-bg-light: rgba(255, 255, 255, 0.8);
+            --screenshot-bg-dark: rgba(40, 40, 40, 0.8);
+            --screenshot-icon-light: #2c3e50;
+            --screenshot-icon-dark: #e0e0e0;
+            --social-bg-light: rgba(255,255,255,0.7);
+            --social-bg-dark: rgba(40, 40, 40, 0.7);
+            --social-hover-light: rgba(255,255,255,1);
+            --social-hover-dark: rgba(50, 50, 50, 1);
+            --social-border-light: rgba(0, 0, 0, 0.1);
+            --social-border-dark: rgba(255, 255, 255, 0.1);
+            --footer-text-light: #7f8c8d;
+            --footer-text-dark: #aaaaaa;
+            --section-border-light: #3498db;
+            --section-border-dark: #5dade2;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,13 +60,19 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            font-family: 'SF Pro Display', 'Segoe UI', 'Microsoft YaHei', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef, #dee2e6);
+            color: var(--text-color-light);
+            background: var(--bg-gradient-light);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             padding: 15px;
+            transition: background 0.5s ease;
+        }
+
+        body.dark-mode {
+            background: var(--bg-gradient-dark);
+            color: var(--text-color-dark);
         }
 
         @keyframes gradientBG {
@@ -30,11 +81,49 @@
             100% { background-position: 0% 50%; }
         }
 
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .theme-toggle {
+            background: rgba(40, 40, 40, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .theme-toggle i {
+            color: #e0e0e0;
+        }
+
         .container {
             max-width: 1330px;
             margin: 0 auto;
             padding: 14.25px;
-            /* 已移除 transform: scale(0.95); */
         }
 
         .hero-header {
@@ -42,16 +131,21 @@
             padding: 28.5px 19px;
             background: transparent;
             backdrop-filter: none;
-            border-radius: 12px;
+            border-radius: 16px;
             margin-bottom: 19px;
-            color: #2c3e50;
+            color: var(--header-text-light);
             box-shadow: none;
             border: none;
+            position: relative;
+        }
+
+        body.dark-mode .hero-header {
+            color: var(--header-text-dark);
         }
 
         .header-content {
             display: flex;
-            align-items: center; /* 垂直居中对齐 */
+            align-items: center;
             justify-content: center;
             gap: 14.25px;
             margin-bottom: 11.4px;
@@ -59,31 +153,34 @@
 
         .logo-container {
             display: flex;
-            align-items: center; 
+            align-items: center;
             justify-content: center;
         }
 
         .logo {
-            background: none; 
-            border-radius: 0; 
+            background: none;
+            border-radius: 0;
             width: auto;
             height: auto;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: none;
-            overflow: visible; 
+            overflow: visible;
         }
 
         .logo:hover {
-            transform: scale(1.1); 
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-mode .logo:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
         .logo-favicon {
-            width: 42px; 
+            width: 42px;
             height: 42px;
             object-fit: contain;
-            margin-right: 10px; 
-            
+            margin-right: 10px;
             transition: transform 0.5s ease-out;
         }
         .logo-favicon:hover {
@@ -96,15 +193,23 @@
             font-size: 2.375rem;
             font-weight: 300;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            color: #2c3e50;
+            color: var(--header-text-light);
             display: flex;
             align-items: center;
         }
 
+        body.dark-mode h1 {
+            color: var(--header-text-dark);
+        }
+
         .tagline {
             font-size: 1.045rem;
-            color: #7f8c8d;
+            color: var(--sub-text-light);
             margin-bottom: 14.25px;
+        }
+
+        body.dark-mode .tagline {
+            color: var(--sub-text-dark);
         }
 
         .social-links {
@@ -119,21 +224,32 @@
             display: inline-flex;
             align-items: center;
             gap: 5.7px;
-            color: #2c3e50;
+            color: var(--header-text-light);
             text-decoration: none;
             padding: 7.6px 15.2px;
             border-radius: 25px;
-            background: rgba(255,255,255,0.7);
+            background: var(--social-bg-light);
             backdrop-filter: blur(8px);
             transition: all 0.3s ease;
             font-size: 0.855rem;
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--social-border-light);
+        }
+
+        body.dark-mode .social-link {
+            background: var(--social-bg-dark);
+            color: var(--header-text-dark);
+            border: 1px solid var(--social-border-dark);
         }
 
         .social-link:hover {
-            background: rgba(255,255,255,1);
+            background: var(--social-hover-light);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        body.dark-mode .social-link:hover {
+            background: var(--social-hover-dark);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
         }
 
         .projects-grid {
@@ -156,35 +272,50 @@
         }
 
         .project-card {
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 10px;
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
             overflow: hidden;
             transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--card-bg-light);
             backdrop-filter: blur(5px);
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+            box-shadow: var(--shadow-light);
             position: relative;
             display: flex;
             flex-direction: column;
             cursor: pointer;
         }
 
+        body.dark-mode .project-card {
+            background: var(--card-bg-dark);
+            border: 1px solid var(--border-dark);
+            box-shadow: var(--shadow-dark);
+        }
+
         .project-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 24px rgba(52, 152, 219, 0.2);
+            box-shadow: var(--hover-shadow-light);
             border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        body.dark-mode .project-card:hover {
+            box-shadow: var(--hover-shadow-dark);
         }
 
         .project-screenshot {
             width: 100%;
-            height: 123.5px;
-            background: linear-gradient(45deg, #3498db, #2ecc71);
+            height: 95px;
+            background: var(--screenshot-bg-light);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
             flex-shrink: 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        body.dark-mode .project-screenshot {
+            background: var(--screenshot-bg-dark);
         }
 
         .project-screenshot img,
@@ -192,12 +323,16 @@
              width: 100%;
              height: 100%;
              object-fit: cover;
-             font-size: 3.8rem;
-             color: rgba(255, 255, 255, 0.8);
-             background-color: #2c3e50;
+             font-size: 2.8rem;
+             color: var(--screenshot-icon-light);
              display: flex;
              align-items: center;
              justify-content: center;
+        }
+
+        body.dark-mode .project-screenshot img,
+        body.dark-mode .project-screenshot i.fa-solid {
+            color: var(--screenshot-icon-dark);
         }
 
         .project-card:hover .project-screenshot img,
@@ -220,15 +355,27 @@
         }
 
         .status-active {
-            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            background: var(--status-active-light);
+        }
+
+        body.dark-mode .status-active {
+            background: var(--status-active-dark);
         }
 
         .status-closed {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            background: var(--status-closed-light);
+        }
+
+        body.dark-mode .status-closed {
+            background: var(--status-closed-dark);
         }
 
         .status-transferred {
-            background: linear-gradient(135deg, #f39c12, #d35400);
+            background: var(--status-transferred-light);
+        }
+
+        body.dark-mode .status-transferred {
+            background: var(--status-transferred-dark);
         }
 
         .project-content {
@@ -241,12 +388,16 @@
         .project-title {
             font-size: 0.95rem;
             margin-bottom: 5.7px;
-            color: #2c3e50;
+            color: var(--header-text-light);
             font-weight: 600;
         }
 
+        body.dark-mode .project-title {
+            color: var(--header-text-dark);
+        }
+
         .project-url {
-            color: #3498db;
+            color: var(--link-color-light);
             text-decoration: none;
             font-size: 0.76rem;
             word-break: break-all;
@@ -254,17 +405,29 @@
             display: block;
         }
 
+        body.dark-mode .project-url {
+            color: var(--link-color-dark);
+        }
+
         .project-url:hover {
             text-decoration: underline;
-            color: #2980b9;
+            color: var(--link-hover-light);
+        }
+
+        body.dark-mode .project-url:hover {
+            color: var(--link-hover-dark);
         }
 
         .project-description {
-            color: #7f8c8d;
+            color: var(--sub-text-light);
             margin-bottom: 7.6px;
             font-size: 0.8075rem;
             line-height: 1.4;
             flex-grow: 1;
+        }
+
+        body.dark-mode .project-description {
+            color: var(--sub-text-dark);
         }
 
         .project-meta {
@@ -276,12 +439,21 @@
             margin-top: auto;
         }
 
+        body.dark-mode .project-meta {
+            color: #aaaaaa;
+        }
+
         .launch-date {
             background: rgba(52, 152, 219, 0.1);
             padding: 2.85px 4.75px;
             border-radius: 10px;
             font-size: 0.665rem;
             color: #3498db;
+        }
+
+        body.dark-mode .launch-date {
+            background: rgba(93, 173, 226, 0.2);
+            color: #5dade2;
         }
 
         .closed-date {
@@ -292,10 +464,15 @@
             font-size: 0.665rem;
         }
 
+        body.dark-mode .closed-date {
+            background: rgba(220, 60, 46, 0.2);
+            color: #ec7063;
+        }
+
         footer {
             text-align: center;
             padding: 17.1px 14.25px;
-            color: #7f8c8d;
+            color: var(--footer-text-light);
             background: transparent;
             backdrop-filter: none;
             border-radius: 12px;
@@ -304,14 +481,23 @@
             border: none;
         }
 
+        body.dark-mode footer {
+            color: var(--footer-text-dark);
+        }
+
         h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
+            color: var(--header-text-light);
+            border-bottom: 2px solid var(--section-border-light);
             padding-bottom: 10px;
             margin-bottom: 20px;
             font-size: 1.6rem;
             position: relative;
             text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        body.dark-mode h2 {
+            color: var(--header-text-dark);
+            border-bottom: 2px solid var(--section-border-dark);
         }
 
         h2::after {
@@ -321,7 +507,114 @@
             left: 0;
             width: 40px;
             height: 2px;
-            background: #3498db;
+            background: var(--section-border-light);
+        }
+
+        body.dark-mode h2::after {
+            background: var(--section-border-dark);
+        }
+
+        /* 公众号二维码弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: var(--card-bg-light);
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 16px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: var(--card-bg-dark);
+        }
+
+        .close {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            color: var(--text-color-light);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1002;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .close {
+            color: var(--text-color-dark);
+        }
+
+        .close:hover {
+            color: #ff6b6b;
+            transform: scale(1.1);
+        }
+
+        .qrcode-container {
+            margin: 15px 0;
+        }
+
+        .qrcode-image {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            display: block;
+            border: 5px solid white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .qrcode-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--header-text-light);
+        }
+
+        body.dark-mode .qrcode-title {
+            color: var(--header-text-dark);
+        }
+
+        .qrcode-desc {
+            font-size: 0.9rem;
+            color: var(--sub-text-light);
+            margin-top: 10px;
+        }
+
+        body.dark-mode .qrcode-desc {
+            color: var(--sub-text-dark);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         @media (max-width: 1024px) {
@@ -358,7 +651,7 @@
             }
 
             .project-screenshot {
-                height: 114px;
+                height: 85px;
             }
 
             .project-content {
@@ -385,19 +678,19 @@
             }
 
             .header-content {
-                flex-direction: column; 
-                gap: 10px; 
+                flex-direction: column;
+                gap: 10px;
             }
             
             .logo-favicon {
                 width: 34px;
                 height: 34px;
-                margin-right: 0; 
+                margin-right: 0;
             }
             
             h1 {
                 font-size: 1.9rem;
-                justify-content: center; 
+                justify-content: center;
             }
 
             .tagline {
@@ -405,13 +698,14 @@
             }
 
             .social-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 11.4px;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
             }
 
             .social-link {
-                width: 100%;
+                width: calc(50% - 4px);
                 justify-content: center;
                 padding: 8.55px;
                 font-size: 0.855rem;
@@ -423,7 +717,7 @@
             }
 
             .project-screenshot {
-                height: 104.5px;
+                height: 75px;
             }
 
             .project-content {
@@ -464,10 +758,13 @@
             }
 
             .social-links {
-                gap: 9.5px;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 6px;
             }
 
             .social-link {
+                width: calc(50% - 3px);
                 padding: 7.6px;
                 font-size: 0.8075rem;
             }
@@ -478,7 +775,7 @@
             }
 
             .project-screenshot {
-                height: 95px;
+                height: 65px;
             }
 
             .project-content {
@@ -508,6 +805,13 @@
             }
         }
 
+        @media (max-width: 360px) {
+            .social-link {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+
         .project-card {
             will-change: transform;
         }
@@ -518,11 +822,26 @@
     </style>
 </head>
 <body>
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- 公众号二维码弹窗 -->
+    <div id="qrcodeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="qrcode-container">
+                <h3 class="qrcode-title">关注公众号</h3>
+                <img src="https://www.coolist.net/qrcode.png" alt="公众号二维码" class="qrcode-image">
+                <p class="qrcode-desc">扫码关注获取更多软件推荐</p>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="hero-header">
             <div class="header-content">
                 <div class="logo-container">
-                    <!-- 修改部分：移除了 .logo div，直接应用样式到 img -->
                     <img src="https://www.coolist.net/favicon.ico" alt="Logo" class="logo-favicon">
                 </div>
                 <h1>软件小编</h1>
@@ -535,6 +854,9 @@
                 </a>
                 <a href="https://www.zhihu.com/people/appts" target="_blank" class="social-link">
                     <i class="fab fa-zhihu"></i> 知乎
+                </a>
+                <a href="#" class="social-link" id="wechatLink">
+                    <i class="fab fa-weixin"></i> 公众号
                 </a>
                 <a href="https://space.bilibili.com/141239213" target="_blank" class="social-link">
                     <i class="fab fa-bilibili"></i> B站
@@ -551,7 +873,6 @@
         <h2><i class="fas fa-project-diagram"></i> 我的项目</h2>
         
         <div class="projects-grid">
-            <!-- 1. 酷软清单 -->
             <div class="project-card">
                 <div class="project-screenshot">
                     <i class="fas fa-list-check"></i>
@@ -568,7 +889,6 @@
                 </div>
             </div>
 
-            <!-- 2. 初见之航 -->
             <div class="project-card">
                 <div class="project-screenshot">
                     <i class="fas fa-compass"></i>
@@ -585,7 +905,6 @@
                 </div>
             </div>
 
-            <!-- 3. 软件探索 -->
             <div class="project-card">
                 <div class="project-screenshot">
                     <i class="fas fa-blog"></i>
@@ -602,7 +921,6 @@
                 </div>
             </div>
 
-            <!-- 4. 科幻片指南 -->
             <div class="project-card">
                 <div class="project-screenshot">
                     <i class="fas fa-film"></i>
@@ -619,7 +937,6 @@
                 </div>
             </div>
 
-            <!-- 5. 选择主页 -->
             <div class="project-card">
                 <div class="project-screenshot">
                     <i class="fas fa-house"></i>
@@ -636,7 +953,6 @@
                 </div>
             </div>
 
-            <!-- 6. 简约导航 -->
             <div class="project-card">
                 <div class="project-screenshot">
                     <i class="fas fa-link"></i>
@@ -653,7 +969,6 @@
                 </div>
             </div>
 
-            <!-- 7. 软件资源库 -->
             <div class="project-card">
                 <div class="project-screenshot">
                     <i class="fas fa-box-open"></i>
@@ -670,7 +985,6 @@
                 </div>
             </div>
 
-            <!-- 8. 注销指南 -->
             <div class="project-card">
                 <div class="project-screenshot">
                     <i class="fas fa-user-slash"></i>
@@ -698,6 +1012,62 @@
             const currentYear = new Date().getFullYear();
             document.getElementById('year').textContent = currentYear;
 
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+            const body = document.body;
+            
+            // 检查用户之前的主题偏好
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+
+            themeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                
+                if (body.classList.contains('dark-mode')) {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+
+            // 公众号二维码弹窗功能
+            const wechatLink = document.getElementById('wechatLink');
+            const modal = document.getElementById('qrcodeModal');
+            const closeBtn = document.querySelector('.close');
+
+            // 点击公众号链接显示二维码弹窗
+            wechatLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                modal.style.display = 'block';
+            });
+
+            // 点击关闭按钮隐藏弹窗
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            // 点击弹窗外部区域隐藏弹窗
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // ESC键关闭弹窗
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && modal.style.display === 'block') {
+                    modal.style.display = 'none';
+                }
+            });
+
             const projectCards = document.querySelectorAll('.project-card');
             projectCards.forEach(card => {
                 card.addEventListener('click', function(e) {
@@ -715,13 +1085,12 @@
             statusElements.forEach(status => {
                 const isClosed = status.classList.contains('status-closed');
                 const isTransferred = status.classList.contains('status-transferred');
-                // 更新 Tooltip 文字以匹配新的状态名称
                 if (isClosed) {
                     status.title = '此项目已停止运营';
                 } else if (isTransferred) {
-                    status.title = '此项目已转让'; // 更新 Tooltip
+                    status.title = '此项目已转让';
                 } else {
-                    status.title = '此项目正在维护'; // 更新 Tooltip
+                    status.title = '此项目正在维护';
                 }
             });
         });
