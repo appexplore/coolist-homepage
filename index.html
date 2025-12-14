@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>软件小编</title>
-    <meta name="description" content="软件小编的作品集，包括酷软清单、初见之航、软件探索等项目。">
-    <!-- 注意：这里的 href 应该指向你的 favicon.ico -->
+    <meta name="description" content="分享好用的软件和网站">
     <link rel="icon" type="image/x-icon" href="https://www.coolist.net/favicon.ico">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -60,46 +59,36 @@
 
         .logo-container {
             display: flex;
-            align-items: center; /* 确保内部元素垂直居中 */
+            align-items: center; 
             justify-content: center;
         }
 
-        /* --- 修改 Logo 样式 --- */
         .logo {
-            /* 移除固定宽高和圆形背景 */
             background: none; 
             border-radius: 0; 
             width: auto;
             height: auto;
-            /* 保持原有的过渡和阴影效果 */
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: none; /* 可选：移除圆形时的阴影 */
-            overflow: visible; /* 允许图片超出原始容器范围（如果需要） */
+            box-shadow: none;
+            overflow: visible; 
         }
 
         .logo:hover {
-            /* 移除旋转，因为不再是圆形图标 */
             transform: scale(1.1); 
-            /* 可选：调整悬停时的阴影 */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
         }
 
-        /* --- 修改 Favicon 样式 --- */
         .logo-favicon {
-            /* 设置新的宽度和高度，使其与文字大小匹配 */
-            width: 42px; /* 大致等于 h1 字高的 0.8 倍 (2.375rem * 0.8 ≈ 42px) */
+            width: 42px; 
             height: 42px;
             object-fit: contain;
-            /* 添加一点右边距，与文字保持间距 */
             margin-right: 10px; 
             
-            /* 新增：添加旋转特效 */
             transition: transform 0.5s ease-out;
         }
         .logo-favicon:hover {
             transform: rotate(360deg);
         }
-        /* --- End 修改 Logo 样式 --- */
 
 
         h1 {
@@ -108,7 +97,6 @@
             font-weight: 300;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
             color: #2c3e50;
-            /* 确保文字也参与垂直居中 */
             display: flex;
             align-items: center;
         }
@@ -336,14 +324,12 @@
             background: #3498db;
         }
 
-        /* --- 调整中等屏幕下的样式 --- */
         @media (max-width: 1024px) {
             .container {
                 max-width: 1140px;
                 padding: 11.4px;
             }
 
-            /* 调整 logo 和 favicon 大小 */
             .logo-favicon {
                 width: 38px;
                 height: 38px;
@@ -391,9 +377,7 @@
                 font-size: 0.76rem;
             }
         }
-        /* --- End 调整中等屏幕下的样式 --- */
 
-        /* --- 调整小屏幕下的样式 --- */
         @media (max-width: 768px) {
             .container {
                 max-width: 100%;
@@ -401,22 +385,19 @@
             }
 
             .header-content {
-                /* 在非常小的屏幕上可能需要堆叠 */
                 flex-direction: column; 
-                gap: 10px; /* 增加 logo 和文字之间的间距 */
+                gap: 10px; 
             }
             
-            /* 调整 logo 和 favicon 大小 */
             .logo-favicon {
                 width: 34px;
                 height: 34px;
-                margin-right: 0; /* 在列排列时不需要右边距 */
+                margin-right: 0; 
             }
             
-            /* 让标题居中 */
             h1 {
                 font-size: 1.9rem;
-                justify-content: center; /* 如果 h1 内部有多个 flex 项，则居中 */
+                justify-content: center; 
             }
 
             .tagline {
@@ -463,15 +444,12 @@
                 gap: 3.8px;
             }
         }
-        /* --- End 调整小屏幕下的样式 --- */
 
-        /* --- 调整超小屏幕下的样式 --- */
         @media (max-width: 480px) {
             .container {
                 padding: 5.7px;
             }
 
-            /* 进一步调整 logo 和 favicon 大小 */
             .logo-favicon {
                 width: 30px;
                 height: 30px;
@@ -529,7 +507,6 @@
                 padding: 1.9px 3.8px;
             }
         }
-        /* --- End 调整超小屏幕下的样式 --- */
 
         .project-card {
             will-change: transform;
