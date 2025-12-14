@@ -254,12 +254,13 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); /* 默认自动填充 */
             gap: 15.2px;
             margin-top: 19px;
         }
 
-        @media (min-width: 1200px) and (max-width: 1920px) {
+        /* 大屏设备 (>= 1200px) 的特定列数 */
+        @media (min-width: 1200px) and (max-width: 1919px) {
             .projects-grid {
                 grid-template-columns: repeat(4, minmax(190px, 1fr));
             }
@@ -398,25 +399,28 @@
 
         .project-url {
             color: var(--link-color-light);
-            text-decoration: none;
+            text-decoration: none; /* 默认无下划线 */
             font-size: 0.76rem;
             word-break: break-all;
             margin-bottom: 5.7px;
             display: block;
+            /* 移除了 hover 下的 text-decoration: underline; */
         }
 
         body.dark-mode .project-url {
             color: var(--link-color-dark);
         }
 
+        /* 可选：如果希望普通状态下也有下划线，可以取消下面注释并修改上面的默认 text-decoration */
+        /*
         .project-url:hover {
             text-decoration: underline;
             color: var(--link-hover-light);
         }
-
         body.dark-mode .project-url:hover {
             color: var(--link-hover-dark);
         }
+        */
 
         .project-description {
             color: var(--sub-text-light);
@@ -628,7 +632,7 @@
                 height: 38px;
                 margin-right: 8px;
             }
-            
+
             h1 {
                font-size: 2.09rem;
             }
@@ -681,13 +685,13 @@
                 flex-direction: column;
                 gap: 10px;
             }
-            
+
             .logo-favicon {
                 width: 34px;
                 height: 34px;
                 margin-right: 0;
             }
-            
+
             h1 {
                 font-size: 1.9rem;
                 justify-content: center;
@@ -711,8 +715,9 @@
                 font-size: 0.855rem;
             }
 
+            /* 关键修改：在 <= 768px 宽度下，项目网格变为两列 */
             .projects-grid {
-                 grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+                 grid-template-columns: repeat(2, 1fr); /* 强制两列 */
                  gap: 13.3px;
             }
 
@@ -769,8 +774,9 @@
                 font-size: 0.8075rem;
             }
 
+            /* 在更小的屏幕上保持两列，但减小间距和字体 */
             .projects-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 11.4px;
             }
 
@@ -806,8 +812,9 @@
         }
 
         @media (max-width: 360px) {
+            /* 在非常窄的屏幕上，可能需要进一步调整，但通常两列仍然适用 */
             .social-link {
-                width: 100%;
+                width: 100%; /* 社交链接在极窄屏变为一列 */
                 margin-bottom: 5px;
             }
         }
@@ -832,7 +839,7 @@
             <span class="close">&times;</span>
             <div class="qrcode-container">
                 <h3 class="qrcode-title">关注公众号</h3>
-                <img src="https://www.coolist.net/qrcode.png" alt="公众号二维码" class="qrcode-image">
+                <img src="https://www.coolist.net/qrcode.png" alt="公众号二维码" class="qrcode-image"> <!-- 已更新 -->
                 <p class="qrcode-desc">扫码关注获取更多软件推荐</p>
             </div>
         </div>
@@ -871,7 +878,7 @@
         </div>
 
         <h2><i class="fas fa-project-diagram"></i> 我的项目</h2>
-        
+
         <div class="projects-grid">
             <div class="project-card">
                 <div class="project-screenshot">
@@ -1003,19 +1010,20 @@
         </div>
 
         <footer>
-            <p id="copyright">© <span id="year">2025</span> 软件小编 </p>
+            <!-- 页脚年份固定为 2025 -->
+            <p>© 2025 软件小编 </p>
         </footer>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const currentYear = new Date().getFullYear();
-            document.getElementById('year').textContent = currentYear;
+
+            // 移除了自动更新年份的代码
 
             const themeToggle = document.getElementById('themeToggle');
             const themeIcon = themeToggle.querySelector('i');
             const body = document.body;
-            
+
             // 检查用户之前的主题偏好
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
@@ -1026,7 +1034,7 @@
 
             themeToggle.addEventListener('click', function() {
                 body.classList.toggle('dark-mode');
-                
+
                 if (body.classList.contains('dark-mode')) {
                     themeIcon.classList.remove('fa-moon');
                     themeIcon.classList.add('fa-sun');
@@ -1097,3 +1105,5 @@
     </script>
 </body>
 </html>
+
+
